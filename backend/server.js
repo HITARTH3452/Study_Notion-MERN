@@ -1,6 +1,17 @@
 const express = require('express')
 const app = express();
 
+//for deploying
+const path = require('path');
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+})
+
 // packages
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
